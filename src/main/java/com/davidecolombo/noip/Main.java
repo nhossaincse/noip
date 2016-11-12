@@ -1,0 +1,37 @@
+package com.davidecolombo.noip;
+
+import org.kohsuke.args4j.CmdLineException;
+import org.kohsuke.args4j.CmdLineParser;
+import org.kohsuke.args4j.Option;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import uk.org.lidalia.sysoutslf4j.context.SysOutOverSLF4J;
+
+public class Main {
+
+	private static Logger logger = LoggerFactory.getLogger(Main.class);
+
+	@Option(name = "-settings", required = true)
+	private String fileName;
+
+	private void doMain(String[] args) {
+		int status = NoIp.FATAL_ERROR;
+		try {
+			new CmdLineParser(this).parseArgument(args);
+			status = NoIp.applyFromFile(fileName);
+		} catch (CmdLineException e) {
+			logger.error(e.getMessage(), e);
+		}
+		logger.debug("Status: " + status);
+		System.exit(status);
+	}
+
+	/*
+	 * Usage: -settings src/main/resources/settings.json
+	 */
+	public static void main(String[] args) {
+		SysOutOverSLF4J.sendSystemOutAndErrToSLF4J();
+		new Main().doMain(args);
+	}
+}
