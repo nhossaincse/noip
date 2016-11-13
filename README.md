@@ -8,12 +8,17 @@ This is a Java DNS updater for [No-IP](https://www.noip.com/), an alternative to
 | _username_ | Your No-IP username. |
 | _password_ | Your No-IP password. |
 | _hostname_ | The hostname(s) (host.domain.com) or group(s) (group_name) to be updated. |
-| _useragent_ | NameOfUpdateProgram/VersionNumber maintainercontact@domain.com |
+| _useragent_ | HTTP User-Agent to help No-IP identify your client. |
 
 __NOTE__: When making an update it's important to include an HTTP User-Agent to help No-IP identify different clients that access the system. Clients that do not supply a User-Agent risk being blocked from the system.
 Your user agent should be in the following format:
 ```
 NameOfUpdateProgram/VersionNumber maintainercontact@domain.com
+```
+Please note you've to manually schedule the application in order to keep updated your dynamic DNS. The simplest way is probably using [Cron](https://en.wikipedia.org/wiki/Cron). Example:
+
+```
+*/30 * * * * sudo DISPLAY=:1 java -cp /mnt/usbstorage/noip/noip-0.0.1-SNAPSHOT-jar-with-dependencies.jar com.davidecolombo.noip.Main -settings /mnt/usbstorage/noip/resources/settings.json > /mnt/usbstorage/noip/log.txt 2>&1
 ```
 
 I used the following components, see them included as dependencies in [pom.xml](pom.xml):
@@ -24,9 +29,3 @@ I used the following components, see them included as dependencies in [pom.xml](
 * [Lombok](https://projectlombok.org/) an amazing solution for lazy coders.
 * [Jackson Data Processor](https://github.com/FasterXML/jackson-databind) a multi-purpose library for processing JSON data. 
 * [args4j](https://github.com/kohsuke/args4j) a library to parse command line arguments.
-
-Please note you've to manually schedule the application in order to keep updated your dynamic DNS. The simplest way is probably using [Cron](https://en.wikipedia.org/wiki/Cron). Example:
-
-```
-*/30 * * * * sudo DISPLAY=:1 java -cp /mnt/usbstorage/noip/noip-0.0.1-SNAPSHOT-jar-with-dependencies.jar com.davidecolombo.noip.Main -settings /mnt/usbstorage/noip/resources/settings.json > /mnt/usbstorage/noip/log.txt 2>&1
-```
