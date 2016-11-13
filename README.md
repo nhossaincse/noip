@@ -1,7 +1,22 @@
 # noip
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=T9USZAMJHNBBC&lc=IT&item_name=Davide%20Colombo&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted)
 
-This is a Java DNS updater for [No-IP](https://www.noip.com/), an alternative to [DUC](https://www.noip.com/download) (DNS Update Client). This updater is using both [Ipify](https://www.ipify.org/) and No-IP APIs to retrieve your current IP address and update your No-IP hostname. I used the following components, see them included as dependencies in [pom.xml](pom.xml):
+This is a Java DNS updater for [No-IP](https://www.noip.com/), an alternative to [DUC](https://www.noip.com/download) (DNS Update Client). This updater is using both [Ipify](https://www.ipify.org/) and No-IP APIs to retrieve your current IP address and update your No-IP hostname. Please take a look at [settings.json](src/main/resources/settings.json) to configure it:
+
+| Property | Description |
+| --- | --- |
+| _username_ | Your No-IP username. |
+| _password_ | Your No-IP password. |
+| _hostname_ | The hostname(s) (host.domain.com) or group(s) (group_name) to be updated. |
+| _useragent_ | NameOfUpdateProgram/VersionNumber maintainercontact@domain.com |
+
+__NOTE__: When making an update it's important to include an HTTP User-Agent to help No-IP identify different clients that access the system. Clients that do not supply a User-Agent risk being blocked from the system.
+Your user agent should be in the following format:
+```
+NameOfUpdateProgram/VersionNumber maintainercontact@domain.com
+```
+
+I used the following components, see them included as dependencies in [pom.xml](pom.xml):
 
 * [SLF4J](http://www.slf4j.org/) an abstraction for various logging frameworks.
 * [Logback](http://logback.qos.ch/) a Java logging framework, successor to the popular log4j.
