@@ -30,5 +30,5 @@ I used the following components, see them included as dependencies in [pom.xml](
 * [Jackson Data Processor](https://github.com/FasterXML/jackson-databind) a multi-purpose library for processing JSON data. 
 * [args4j](https://github.com/kohsuke/args4j) a library to parse command line arguments.
 * [Retrofit 2](https://square.github.io/retrofit/) a type-safe HTTP client for Android and Java.
-* [Commons Lang](https://github.com/kohsuke/args4j) provides a host of helper utilities for the java.lang API.
+* [Commons Lang](https://commons.apache.org/proper/commons-lang/) provides a host of helper utilities for the java.lang API.
 
