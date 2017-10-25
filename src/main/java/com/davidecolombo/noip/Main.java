@@ -16,10 +16,10 @@ public class Main {
 	private String fileName;
 
 	private void doMain(String[] args) {
-		int status = NoIp.FATAL_ERROR;
+		int status = Noip.FATAL_ERROR;
 		try {
 			new CmdLineParser(this).parseArgument(args);
-			status = NoIp.applyFromFile(fileName);
+			status = Noip.applyFromFile(fileName);
 		} catch (CmdLineException e) {
 			logger.error(e.getMessage(), e);
 		}
@@ -28,7 +28,7 @@ public class Main {
 	}
 
 	/*
-	 * Usage: -settings src/main/resources/settings.json
+	 * Usage: -settings src/test/resources/settings.json
 	 */
 	public static void main(String[] args) {
 		SysOutOverSLF4J.sendSystemOutAndErrToSLF4J();

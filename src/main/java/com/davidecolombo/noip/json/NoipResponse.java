@@ -10,8 +10,16 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "ip" })
-public class Ipify {
+@JsonPropertyOrder({
+	"status",
+	"description",
+	"successful",
+	"exitcode"
+})
+public class NoipResponse {
 
-	@JsonProperty("ip") private String ip;
+	@JsonProperty("status") private String status;
+	@JsonProperty("description") private String description;
+	@JsonProperty("successful") private boolean successful;
+	@JsonProperty("exitcode") private int exitcode;
 }
