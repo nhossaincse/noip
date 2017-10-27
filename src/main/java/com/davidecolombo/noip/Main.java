@@ -15,8 +15,8 @@ public class Main {
 	@Option(name = "-settings", required = true)
 	private String fileName;
 
-	private void doMain(String[] args) {
-		int status = Noip.FATAL_ERROR;
+	private void execute(String[] args) {
+		int status = Noip.ERROR_CODE;
 		try {
 			new CmdLineParser(this).parseArgument(args);
 			status = Noip.applyFromFile(fileName);
@@ -32,6 +32,6 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		SysOutOverSLF4J.sendSystemOutAndErrToSLF4J();
-		new Main().doMain(args);
+		new Main().execute(args);
 	}
 }

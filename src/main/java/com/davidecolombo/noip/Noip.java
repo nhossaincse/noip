@@ -47,13 +47,13 @@ public class Noip implements Function<Settings, Integer> {
 			.setSuccessful(false)
 			.setExitcode(Integer.MAX_VALUE);
 
-	public static final int FATAL_ERROR = -1;
+	public static final int ERROR_CODE = -1;
 
 	/**
 	 * Automatically updates the DNS at No-IP whenever it changes.
 	 * 
 	 * @param settings
-	 * @return A No-IP {@link NoipResponse} instance.
+	 * @return A No-IP exit code.
 	 * @throws IOException
 	 * @throws MalformedURLException
 	 * @throws JsonMappingException
@@ -110,9 +110,9 @@ public class Noip implements Function<Settings, Integer> {
 					.orElse(RESPONSE_UNKNOWN)
 					.getExitcode();
 		} else {
-			logger.error(response.errorBody().string());
+			logger.error("No-IP response is empty.");
 		}
-		return FATAL_ERROR;
+		return ERROR_CODE;
 	}
 
 	@Override
@@ -122,14 +122,14 @@ public class Noip implements Function<Settings, Integer> {
 		} catch (IOException | InterruptedException | ExecutionException e) {
 			logger.error(e.getMessage(), e);
 		}
-		return FATAL_ERROR;
+		return ERROR_CODE;
 	}
 
 	/**
 	 * Parse JSON settings from fileName.
 	 * 
 	 * @param fileName
-	 * @return
+	 * @return A No-IP exit code.
 	 */
 	public static Integer applyFromFile(@NonNull String fileName) {
 		try {
@@ -137,6 +137,6 @@ public class Noip implements Function<Settings, Integer> {
 		} catch (IOException e) {
 			logger.error(e.getMessage(), e);
 		}
-		return FATAL_ERROR;
+		return ERROR_CODE;
 	}
 }
