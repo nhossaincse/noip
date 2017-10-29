@@ -11,7 +11,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "ip" })
-public class Ipify {
+public class IpifyResponse {
 
 	@JsonProperty("ip") private String ip;
 }

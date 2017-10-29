@@ -12,7 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.davidecolombo.noip.api.INoipApi;
-import com.davidecolombo.noip.json.Ipify;
+import com.davidecolombo.noip.json.IpifyResponse;
 import com.davidecolombo.noip.json.NoipResponse;
 import com.davidecolombo.noip.json.Settings;
 import com.fasterxml.jackson.core.JsonParseException;
@@ -73,7 +73,7 @@ public class Noip implements Function<Settings, Integer> {
 		/*
 		 * Get IP address from IPIFY.
 		 */
-		Ipify ipify = new ObjectMapper().readValue(new URL(IPIFY_JSON), Ipify.class);
+		IpifyResponse ipify = new ObjectMapper().readValue(new URL(IPIFY_JSON), IpifyResponse.class);
 
 		/*
 		 * Build API and synchronously update No-IP.
