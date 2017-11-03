@@ -1,4 +1,4 @@
-package com.davidecolombo.noip.api;
+package com.davidecolombo.noip.noip;
 
 import com.davidecolombo.noip.retrofit.BasicAuthInterceptor;
 import com.davidecolombo.noip.retrofit.UserAgentInterceptor;

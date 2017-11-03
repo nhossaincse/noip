@@ -1,7 +1,8 @@
-package com.davidecolombo.noip.json;
+package com.davidecolombo.noip;
 
 import java.util.List;
 
+import com.davidecolombo.noip.noip.NoipResponse;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -13,17 +14,17 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-	"username",
+	"userName",
 	"password",
-	"hostname",
-	"useragent",
+	"hostName",
+	"userAgent",
 	"responses"
 })
 public class Settings {
 
-	@JsonProperty("username") private String username;
+	@JsonProperty("userName") private String userName;
 	@JsonProperty("password") private String password;
-	@JsonProperty("hostname") private String hostname;
-	@JsonProperty("useragent") private String useragent;
+	@JsonProperty("hostName") private String hostName;
+	@JsonProperty("userAgent") private String userAgent;
 	@JsonProperty("responses") private List<NoipResponse> responses;
 }
