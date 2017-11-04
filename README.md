@@ -31,4 +31,3 @@ I used the following components, see them included as dependencies in [pom.xml](
 * [args4j](https://github.com/kohsuke/args4j) a library to parse command line arguments.
 * [Retrofit 2](https://square.github.io/retrofit/) a type-safe HTTP client for Android and Java.
 * [Commons Lang](https://commons.apache.org/proper/commons-lang/) provides a host of helper utilities for the java.lang API.
-
