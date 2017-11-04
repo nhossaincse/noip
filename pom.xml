@@ -51,6 +51,7 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>3.6</version>
 		</dependency>
+<!--
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-engine</artifactId>
@@ -63,6 +64,7 @@
 			<version>1.0.1</version>
 			<scope>test</scope>
 		</dependency>
+-->
 	</dependencies>
 	<build>
 		<plugins>
