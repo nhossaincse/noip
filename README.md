@@ -18,7 +18,7 @@ NameOfUpdateProgram/VersionNumber maintainercontact@domain.com
 Please also note you've to manually schedule the application execution in order to keep updated your dynamic DNS. The simplest way is probably using [Cron](https://en.wikipedia.org/wiki/Cron). Example:
 
 ```
-*/30 * * * * sudo DISPLAY=:1 java -cp /mnt/usbstorage/noip/noip-0.0.1-SNAPSHOT-jar-with-dependencies.jar com.davidecolombo.noip.Main -settings /mnt/usbstorage/noip/resources/settings.json > /mnt/usbstorage/noip/log.txt 2>&1
+*/30 * * * * sudo DISPLAY=:1 java -cp /mnt/usbstorage/noip/noip-0.0.1-SNAPSHOT-jar-with-dependencies.jar space.davidecolombo.noip.Main -settings /mnt/usbstorage/noip/resources/settings.json > /mnt/usbstorage/noip/log.txt 2>&1
 ```
 
 I used the following components, see them included as dependencies in [pom.xml](pom.xml):
