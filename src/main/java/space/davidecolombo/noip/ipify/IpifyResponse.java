@@ -1,4 +1,4 @@
-package com.davidecolombo.noip.ipify;
+package space.davidecolombo.noip.ipify;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

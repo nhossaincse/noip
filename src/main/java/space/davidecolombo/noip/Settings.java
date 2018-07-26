@@ -1,14 +1,14 @@
-package com.davidecolombo.noip;
+package space.davidecolombo.noip;
 
 import java.util.List;
 
-import com.davidecolombo.noip.noip.NoipResponse;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
+import space.davidecolombo.noip.noip.NoipResponse;
 
 @Data
 @Accessors(chain = true)

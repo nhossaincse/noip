@@ -1,7 +1,4 @@
-package com.davidecolombo.noip.noip;
-
-import com.davidecolombo.noip.retrofit.BasicAuthInterceptor;
-import com.davidecolombo.noip.retrofit.UserAgentInterceptor;
+package space.davidecolombo.noip.noip;
 
 import lombok.NonNull;
 import okhttp3.OkHttpClient;
@@ -10,6 +7,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
+import space.davidecolombo.noip.retrofit.BasicAuthInterceptor;
+import space.davidecolombo.noip.retrofit.UserAgentInterceptor;
 
 public interface INoipApi {
 

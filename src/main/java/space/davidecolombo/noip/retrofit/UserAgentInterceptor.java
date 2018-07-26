@@ -1,4 +1,4 @@
-package com.davidecolombo.noip.retrofit;
+package space.davidecolombo.noip.retrofit;
 
 import java.io.IOException;
 
@@ -20,5 +20,4 @@ public class UserAgentInterceptor implements Interceptor {
 		Request requestWithUserAgent = request.newBuilder().header("User-Agent", userAgent).build();
 		return chain.proceed(requestWithUserAgent);
 	}
-
 }
