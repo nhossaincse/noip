@@ -5,10 +5,10 @@ This is a Java DNS updater for [No-IP](https://www.noip.com/), an alternative to
 
 | Property | Description |
 | --- | --- |
-| _username_ | your No-IP username |
+| _userName_ | your No-IP username |
 | _password_ | your No-IP password |
-| _hostname_ | the hostname(s) (host.domain.com) or group(s) (group_name) to be updated |
-| _useragent_ | HTTP User-Agent to help No-IP identify your client |
+| _hostName_ | the hostname(s) (host.domain.com) or group(s) (group_name) to be updated |
+| _userAgent_ | HTTP User-Agent to help No-IP identify your client |
 
 __NOTE__: When making an update it's important to include an HTTP User-Agent to help No-IP identify different clients that access the system. Clients that do not supply a User-Agent risk being blocked from the system.
 Your user agent should be in the following format:
