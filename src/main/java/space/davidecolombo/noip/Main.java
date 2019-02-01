@@ -14,7 +14,7 @@ import uk.org.lidalia.sysoutslf4j.context.SysOutOverSLF4J;
 @Slf4j
 public class Main implements Function<String[], Integer> {
 
-	@Option(name = "-settings", required = true)
+	@Option(name = "-settings", aliases = {"-s"}, required = true)
 	private String fileName;
 
 	private static class SingletonHolder {
