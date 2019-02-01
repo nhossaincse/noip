@@ -8,7 +8,7 @@ import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
 
 import lombok.extern.slf4j.Slf4j;
-import space.davidecolombo.noip.noip.NoipUpdater;
+import space.davidecolombo.noip.noip.NoIpUpdater;
 import uk.org.lidalia.sysoutslf4j.context.SysOutOverSLF4J;
 
 @Slf4j
@@ -25,16 +25,14 @@ public class Main implements Function<String[], Integer> {
 		return SingletonHolder.instance;
 	}
 
-	public static final int unknownError = -1;
-
 	private Main() {}
 
 	@Override
 	public Integer apply(String[] args) {
-		int status = unknownError;
+		int status = NoIpUpdater.ERROR_RETURN_CODE;
 		try {
 			new CmdLineParser(this).parseArgument(args);
-			status = NoipUpdater.updateByIpify(fileName);
+			status = NoIpUpdater.updateFromIpify(fileName);
 		} catch (CmdLineException | IOException e) {
 			logger.error(e.getLocalizedMessage(), e);
 		}

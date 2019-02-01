@@ -15,46 +15,58 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import retrofit2.Response;
-import space.davidecolombo.noip.Settings;
 import space.davidecolombo.noip.ipify.IpifyResponse;
+import space.davidecolombo.noip.utils.IpUtils;
 
 @Slf4j
-public class NoipUpdater implements BiFunction<Settings, String, Integer> {
+public class NoIpUpdater implements BiFunction<NoIpSettings, String, Integer> {
+
+	public static final int ERROR_RETURN_CODE = -1;
 
 	/*
 	 * IPIFY is a simple public IP address API
 	 */
-	private static final String ipifyUrl = "https://api.ipify.org/?format=json";
+	private static final String IPIFY_URL = "https://api.ipify.org/?format=json";
+
+	/*
+	 * Used to load No-IP responses
+	 */
+	private static final String RESPONSES_FILE = "responses.json";
 
 	/*
 	 * Setup a response for unknown status
 	 */
-	private static final NoipResponse unknownResponse = new NoipResponse()
-			.setStatus("unknown")
-			.setDescription("Unknown response, please review No-IP API.")
-			.setSuccessful(false)
-			.setExitCode(Integer.MAX_VALUE);
+	private static final NoIpResponse UNKNOWN_RESPONSE = NoIpResponse.builder()
+			.successful(false)
+			.exitCode(ERROR_RETURN_CODE)
+		.build();
 
-	private NoipUpdater() {}
+	private NoIpUpdater() {}
 
 	/**
 	 * Automatically updates the DNS at No-IP whenever it changes
 	 * 
-	 * @param settings
-	 * @param ipifyResponse
-	 * @return An exit code
+	 * @param noIpSettings
+	 * @param ip
+	 * @return
 	 * @throws IOException
 	 */
-	private Integer doApply(@NonNull Settings settings, @NonNull String ip) throws IOException {
+	private Integer doApply(@NonNull NoIpSettings noIpSettings, @NonNull String ip) throws IOException {
 
+		if (!IpUtils.isIPv4Address(ip)) {
+			throw new RuntimeException("IP '" + ip + "' isn't a valid IPv4 address!");
+		}
+		
 		/*
 		 * Build API and synchronously update No-IP
 		 */
-		Response<String> response = INoipApi.build(
-				settings.getUserName(),
-				settings.getPassword(),
-				settings.getUserAgent()
-			).update(settings.getHostName(), ip).execute();
+		Response<String> response = INoIpApi.build(
+				noIpSettings.getUserName(),
+				noIpSettings.getPassword(),
+				noIpSettings.getUserAgent()
+			).update(
+				noIpSettings.getHostName(), ip
+			).execute();
 
 		logger.info("HTTP status code: " + response.code());
 		logger.info("HTTP status message: " + response.message());
@@ -76,39 +88,40 @@ public class NoipUpdater implements BiFunction<Settings, String, Integer> {
 		 * Match No-IP string with known responses
 		 */
 		String status = message.split(" ")[0];
-		return settings.getResponses().parallelStream()
+		return noIpSettings.getResponses().parallelStream()
 				.filter(item -> status.equals(item.getStatus())).findAny()
-				.orElse(unknownResponse)
+				.orElse(UNKNOWN_RESPONSE)
 				.getExitCode();
 	}
 
 	@Override
-	public Integer apply(Settings settings, String ip) {
+	public Integer apply(NoIpSettings noIpSettings, String ip) {
 		try {
-			return doApply(settings, ip);
+			return doApply(noIpSettings, ip);
 		} catch (Exception e) {
 			throw new RuntimeException(e.getLocalizedMessage(), e);
 		}
 	}
 
-	public static Integer updateByIpify(@NonNull String fileName)
+	public static Integer updateFromIpify(@NonNull String fileName)
 			throws JsonParseException, JsonMappingException, MalformedURLException, IOException {
 		
 		/*
 		 * Build settings
 		 */
 		ObjectMapper objectMapper = new ObjectMapper();
-		Settings settings = objectMapper.readValue(new File(fileName), Settings.class);
-		objectMapper.readerForUpdating(settings).readValue(NoipUpdater.class.getClassLoader().getResource("responses.json"));
+		NoIpSettings noIpSettings = objectMapper.readValue(new File(fileName), NoIpSettings.class);
+		objectMapper.readerForUpdating(noIpSettings).readValue(NoIpUpdater.class.getClassLoader().getResource(RESPONSES_FILE));
 
 		/*
 		 * Get Ipify response
 		 */
-		IpifyResponse ipifyResponse = new ObjectMapper().readValue(new URL(ipifyUrl), IpifyResponse.class);
+		IpifyResponse ipifyResponse = new ObjectMapper().readValue(new URL(IPIFY_URL), IpifyResponse.class);
+		logger.info(ipifyResponse.toString());
 
 		/*
 		 * Update DNS at No-IP
 		 */
-		return new NoipUpdater().apply(settings, ipifyResponse.getIp());
+		return new NoIpUpdater().apply(noIpSettings, ipifyResponse.getIp());
 	}
 }

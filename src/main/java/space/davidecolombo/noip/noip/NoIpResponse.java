@@ -4,10 +4,17 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.experimental.Accessors;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -16,10 +23,10 @@ import lombok.experimental.Accessors;
 	"successful",
 	"exitCode"
 })
-public class NoipResponse {
+public class NoIpResponse {
 
 	@JsonProperty("status") private String status;
 	@JsonProperty("description") private String description;
-	@JsonProperty("successful") private boolean successful;
-	@JsonProperty("exitCode") private int exitCode;
+	@JsonProperty("successful") @NonNull private Boolean successful;
+	@JsonProperty("exitCode") @NonNull private Integer exitCode;
 }

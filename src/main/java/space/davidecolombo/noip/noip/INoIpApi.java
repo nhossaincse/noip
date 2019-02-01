@@ -10,7 +10,7 @@ import retrofit2.http.Query;
 import space.davidecolombo.noip.retrofit.BasicAuthInterceptor;
 import space.davidecolombo.noip.retrofit.UserAgentInterceptor;
 
-public interface INoipApi {
+public interface INoIpApi {
 
 	/*
 	 * Updates are performed by making an HTTP request to the following URL.
@@ -20,16 +20,16 @@ public interface INoipApi {
 	@GET("nic/update")
 	public Call<String> update(@Query("hostname") String hostname, @Query("myip") String myip);
 
-	public static INoipApi build(@NonNull String username, @NonNull String password, @NonNull String userAgent) {
+	public static INoIpApi build(@NonNull String username, @NonNull String password, @NonNull String userAgent) {
 		OkHttpClient client = new OkHttpClient.Builder()
 				.addInterceptor(new BasicAuthInterceptor(username, password))
 				.addInterceptor(new UserAgentInterceptor(userAgent))
 				.build();
 		Retrofit retrofit = new Retrofit.Builder()
 				.client(client)
-				.baseUrl(INoipApi.BASE_URL)
+				.baseUrl(INoIpApi.BASE_URL)
 				.addConverterFactory(ScalarsConverterFactory.create())
 				.build();
-		return retrofit.create(INoipApi.class);
+		return retrofit.create(INoIpApi.class);
 	}
 }
