@@ -26,10 +26,10 @@ Please also note you've to manually schedule the application execution in order 
 
 Expected output:
 ```
-[main] INFO  s.d.noip.noip.NoIpUpdater - IpifyResponse(ip=93.46.107.32)
+[main] INFO  s.d.noip.noip.NoIpUpdater - IpifyResponse(ip=XX.XX.XXX.XX)
 [main] INFO  s.d.noip.noip.NoIpUpdater - HTTP status code: 200
 [main] INFO  s.d.noip.noip.NoIpUpdater - HTTP status message: OK
-[main] INFO  s.d.noip.noip.NoIpUpdater - No-IP response: nochg 93.46.107.32
+[main] INFO  s.d.noip.noip.NoIpUpdater - No-IP response: nochg XX.XX.XXX.XX
 [main] INFO  space.davidecolombo.noip.Main - Status: 1
 ```
 I used the following components, see them included as dependencies in [pom.xml](pom.xml):
