@@ -21,7 +21,7 @@ NameOfUpdateProgram/VersionNumber maintainercontact@domain.com
 Please also note you've to manually schedule the application execution in order to keep updated your dynamic DNS. The simplest way is probably using [Cron](https://en.wikipedia.org/wiki/Cron). Example:
 
 ```
-*/30 * * * * sudo DISPLAY=:1 java -cp /mnt/usbstorage/noip/noip-0.0.1-SNAPSHOT-jar-with-dependencies.jar space.davidecolombo.noip.Main -settings /mnt/usbstorage/noip/resources/settings.json > /mnt/usbstorage/noip/log.txt 2>&1
+*/30 * * * * sudo DISPLAY=:1 java -cp /home/user/noip/noip-1.0.0-jar-with-dependencies.jar space.davidecolombo.noip.App -settings /mnt/usbstorage/noip/resources/settings.json > /home/user/noip/log.txt 2>&1
 ```
 
 Expected output:
@@ -30,38 +30,5 @@ Expected output:
 [main] INFO  s.d.noip.noip.NoIpUpdater - HTTP status code: 200
 [main] INFO  s.d.noip.noip.NoIpUpdater - HTTP status message: OK
 [main] INFO  s.d.noip.noip.NoIpUpdater - No-IP response: nochg XX.XX.XXX.XX
-[main] INFO  space.davidecolombo.noip.Main - Status: 1
-```
-I used the following components, see them included as dependencies in [pom.xml](pom.xml):
-
-* [SLF4J](http://www.slf4j.org/) an abstraction for various logging frameworks
-* [Logback](http://logback.qos.ch/) a Java logging framework, successor to the popular log4j
-* [sysout-over-slf4j](https://github.com/Mahoney/sysout-over-slf4j) redirect System.out and System.err to SLF4J
-* [Lombok](https://projectlombok.org/) an amazing solution for lazy coders
-* [Jackson Data Processor](https://github.com/FasterXML/jackson-databind) a multi-purpose library for processing JSON data
-* [args4j](https://github.com/kohsuke/args4j) a library to parse command line arguments
-* [Retrofit 2](https://square.github.io/retrofit/) a type-safe HTTP client for Android and Java
-* [Commons Lang](https://commons.apache.org/proper/commons-lang/) provides a host of helper utilities for the java.lang API
-
-```
-+- org.projectlombok:lombok:jar:1.18.10:provided
-+- org.slf4j:slf4j-api:jar:1.7.28:compile
-+- ch.qos.logback:logback-classic:jar:1.2.3:compile
-|  \- ch.qos.logback:logback-core:jar:1.2.3:compile
-+- uk.org.lidalia:sysout-over-slf4j:jar:1.0.2:compile
-+- com.fasterxml.jackson.core:jackson-databind:jar:2.10.0.pr3:compile
-|  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.10.0.pr3:compile
-|  \- com.fasterxml.jackson.core:jackson-core:jar:2.10.0.pr3:compile
-+- args4j:args4j:jar:2.33:compile
-+- com.squareup.retrofit2:retrofit:jar:2.6.2:compile
-|  \- com.squareup.okhttp3:okhttp:jar:3.12.0:compile
-|     \- com.squareup.okio:okio:jar:1.15.0:compile
-+- com.squareup.retrofit2:converter-scalars:jar:2.6.2:compile
-+- org.apache.commons:commons-lang3:jar:3.9:compile
-+- org.junit.jupiter:junit-jupiter-api:jar:5.5.2:test
-|  +- org.apiguardian:apiguardian-api:jar:1.1.0:test
-|  +- org.opentest4j:opentest4j:jar:1.2.0:test
-|  \- org.junit.platform:junit-platform-commons:jar:1.5.2:test
-\- org.junit.jupiter:junit-jupiter-engine:jar:5.5.2:test
-\- org.junit.platform:junit-platform-engine:jar:1.5.2:test
+[main] INFO  space.davidecolombo.noip.App - Status: 1
 ```

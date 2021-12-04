@@ -1,8 +1,8 @@
 package space.davidecolombo.noip.utils;
 
-import java.util.regex.Pattern;
-
 import lombok.experimental.UtilityClass;
+
+import java.util.regex.Pattern;
 
 @UtilityClass
 public class IpUtils {
@@ -11,6 +11,6 @@ public class IpUtils {
 			Pattern.compile("^(([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.){3}([01]?\\d\\d?|2[0-4]\\d|25[0-5])$");
 
 	public static boolean isIPv4Address(final String ip) {
-		return ip == null ? false : IPV4_PATTERN.matcher(ip).matches();
+		return ip != null && IPV4_PATTERN.matcher(ip).matches();
 	}
 }
