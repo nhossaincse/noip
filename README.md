@@ -3,6 +3,8 @@
 ![Travis-CI](https://travis-ci.com/davidecolombo/noip.svg?branch=master)
 [![DepShield Badge](https://depshield.sonatype.org/badges/davidecolombo/noip/depshield.svg)](https://depshield.github.io)
 [![Known Vulnerabilities](https://snyk.io//test/github/davidecolombo/noip/badge.svg?targetFile=pom.xml)](https://snyk.io//test/github/davidecolombo/noip?targetFile=pom.xml)
+![Code Size](https://img.shields.io/github/languages/code-size/davidecolombo/noip)
+![License](https://img.shields.io/github/license/davidecolombo/noip)
 
 This is a Java DNS updater for [No-IP](https://www.noip.com/), an alternative to [DUC](https://www.noip.com/download) (DNS Update Client). This updater is using both [Ipify](https://www.ipify.org/) and No-IP APIs to retrieve your current IP address and update your No-IP hostname. Please take a look at [settings.json](src/test/resources/settings.json) to configure it:
 
