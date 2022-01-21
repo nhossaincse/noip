@@ -15,6 +15,7 @@ jobs:
       - image: cimg/openjdk:11.0
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+    resource_class: small
     steps:
       # Checkout the code as the first step.
       - checkout
