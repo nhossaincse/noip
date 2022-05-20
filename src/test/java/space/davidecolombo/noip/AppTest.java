@@ -66,4 +66,16 @@ class AppTest {
             // wait for system exit with exit code
         }
     }
+
+    @Test
+    void shouldThrowNullPointerException() {
+        Assertions.assertThrows(NullPointerException.class, () -> App.getInstance().update(null));
+    }
+
+    @Test
+    @ExpectSystemExitWithStatus(-1)
+    void shouldThrowCmdLineException() {
+        final String[] args = new String[] {};
+        App.main(args);
+    }
 }

@@ -2,6 +2,7 @@ package space.davidecolombo.noip.noip;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.NonNull;
+import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import retrofit2.Response;
@@ -12,10 +13,10 @@ import space.davidecolombo.noip.utils.ObjectMapperUtils;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.function.BiFunction;
 
 @Slf4j
-public class NoIpUpdater implements BiFunction<NoIpSettings, String, Integer> {
+@UtilityClass
+public class NoIpUpdater {
 
     public static final int ERROR_RETURN_CODE = -1;
 
@@ -37,18 +38,15 @@ public class NoIpUpdater implements BiFunction<NoIpSettings, String, Integer> {
             .exitCode(ERROR_RETURN_CODE)
             .build();
 
-    NoIpUpdater() {
-    }
-
     /**
      * Automatically updates the DNS at No-IP whenever it changes
      *
-     * @param noIpSettings No-IP settings
+     * @param settings No-IP settings
      * @param ip           IP address that must be set
      * @return return code mapped to the received response
      * @throws IOException I/O exception has occurred
      */
-    private Integer doApply(@NonNull NoIpSettings noIpSettings, @NonNull String ip) throws IOException {
+    private static Integer doUpdate(@NonNull NoIpSettings settings, @NonNull String ip) throws IOException {
 
         if (!IpUtils.isIPv4Address(ip)) {
             throw new IllegalArgumentException("IP '" + ip + "' isn't a valid IPv4 address!");
@@ -58,13 +56,12 @@ public class NoIpUpdater implements BiFunction<NoIpSettings, String, Integer> {
          * Build API and synchronously update No-IP
          */
         Response<String> response = INoIpApi.build(
-                noIpSettings.getUserName(),
-                noIpSettings.getPassword(),
-                noIpSettings.getUserAgent()
+                settings.getUserName(),
+                settings.getPassword(),
+                settings.getUserAgent()
         ).update(
-                noIpSettings.getHostName(), ip
+                settings.getHostName(), ip
         ).execute();
-
         logger.info("HTTP status code: " + response.code());
         logger.info("HTTP status message: " + response.message());
 
@@ -77,11 +74,9 @@ public class NoIpUpdater implements BiFunction<NoIpSettings, String, Integer> {
         } else if (response.errorBody() != null) {
             message = response.errorBody().string();
         }
-
         if (StringUtils.isEmpty(message)) {
             throw new RuntimeException("No-IP response is empty!");
         }
-
         message = message.trim();
         logger.info("No-IP response: " + message);
 
@@ -89,16 +84,15 @@ public class NoIpUpdater implements BiFunction<NoIpSettings, String, Integer> {
          * Match No-IP string with known responses
          */
         String status = message.split(" ")[0];
-        return noIpSettings.getResponses().parallelStream()
+        return settings.getResponses().parallelStream()
                 .filter(item -> status.equals(item.getStatus())).findAny()
                 .orElse(UNKNOWN_RESPONSE)
                 .getExitCode();
     }
 
-    @Override
-    public Integer apply(NoIpSettings noIpSettings, String ip) {
+    public static Integer update(NoIpSettings settings, String ip) {
         try {
-            return doApply(noIpSettings, ip);
+            return doUpdate(settings, ip);
         } catch (Exception e) {
             throw new RuntimeException(e.getLocalizedMessage(), e);
         }
@@ -124,6 +118,6 @@ public class NoIpUpdater implements BiFunction<NoIpSettings, String, Integer> {
         /*
          * Update DNS at No-IP
          */
-        return new NoIpUpdater().apply(noIpSettings, ipifyResponse.getIp());
+        return update(noIpSettings, ipifyResponse.getIp());
     }
 }

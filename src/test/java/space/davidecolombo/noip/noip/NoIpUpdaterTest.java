@@ -37,7 +37,7 @@ class NoIpUpdaterTest {
             )).thenReturn(api);
 
             Assertions.assertEquals(exitCode,
-                    new NoIpUpdater().apply(
+                    NoIpUpdater.update(
                             TestUtils.createMockedNoIpSettings(),
                             TestUtils.LOOPBACK_ADDRESS));
         }
@@ -64,7 +64,7 @@ class NoIpUpdaterTest {
             )).thenReturn(api);
 
             Assertions.assertEquals(exitCode,
-                    new NoIpUpdater().apply(
+                    NoIpUpdater.update(
                             TestUtils.createMockedNoIpSettings(),
                             TestUtils.LOOPBACK_ADDRESS));
         }
@@ -86,9 +86,8 @@ class NoIpUpdaterTest {
                     Mockito.anyString() // user-agent
             )).thenReturn(api);
 
-            NoIpUpdater noIpUpdater = new NoIpUpdater();
             RuntimeException exception = Assertions.assertThrows(RuntimeException.class,
-                    () -> noIpUpdater.apply(
+                    () -> NoIpUpdater.update(
                             TestUtils.createMockedNoIpSettings(),
                             TestUtils.LOOPBACK_ADDRESS));
 
@@ -99,10 +98,7 @@ class NoIpUpdaterTest {
 
     @Test
     void shouldReturnUnknownResponseExitCode() throws IOException {
-
-        String status = "bruh";
         int exitCode = NoIpUpdater.ERROR_RETURN_CODE;
-
         try (MockedStatic<INoIpApi> mockedApi = Mockito.mockStatic(INoIpApi.class)) {
 
             INoIpApi api = Mockito.mock(INoIpApi.class);
@@ -118,7 +114,7 @@ class NoIpUpdaterTest {
             )).thenReturn(api);
 
             Assertions.assertEquals(exitCode,
-                    new NoIpUpdater().apply(
+                    NoIpUpdater.update(
                             TestUtils.createMockedNoIpSettings(),
                             TestUtils.LOOPBACK_ADDRESS));
         }
@@ -126,11 +122,23 @@ class NoIpUpdaterTest {
 
     @Test
     void shouldThrowIllegalArgumentException() {
-        NoIpUpdater noIpUpdater = new NoIpUpdater();
         NoIpSettings noIpSettings = new NoIpSettings();
         RuntimeException exception = Assertions.assertThrows(RuntimeException.class,
-                () -> noIpUpdater.apply(noIpSettings, "this is not an ip"));
+                () -> NoIpUpdater.update(noIpSettings, "this is not an ip"));
         Assertions.assertEquals(IllegalArgumentException.class,
                 exception.getCause().getClass());
+    }
+
+    @Test
+    void shouldThrowNullPointerException() {
+        Assertions.assertEquals(NullPointerException.class,
+                Assertions.assertThrows(RuntimeException.class,
+                        () -> NoIpUpdater.update(new NoIpSettings(), null)
+                ).getCause().getClass());
+
+        Assertions.assertEquals(NullPointerException.class,
+                Assertions.assertThrows(RuntimeException.class,
+                        () -> NoIpUpdater.update(null, "127.0.0.1")
+                ).getCause().getClass());
     }
 }

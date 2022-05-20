@@ -8,10 +8,9 @@ import space.davidecolombo.noip.noip.NoIpUpdater;
 import uk.org.lidalia.sysoutslf4j.context.SysOutOverSLF4J;
 
 import java.io.IOException;
-import java.util.function.Function;
 
 @Slf4j
-public class App implements Function<String[], Integer> {
+public class App {
 
 	@Option(name = "-settings", aliases = {"-s"}, required = true)
 	private String fileName;
@@ -26,8 +25,7 @@ public class App implements Function<String[], Integer> {
 
 	private App() {}
 
-	@Override
-	public Integer apply(String[] args) {
+	public Integer update(String[] args) {
 		int status = NoIpUpdater.ERROR_RETURN_CODE;
 		try {
 			new CmdLineParser(this).parseArgument(args);
@@ -44,6 +42,6 @@ public class App implements Function<String[], Integer> {
 	 */
 	public static void main(String[] args) {
 		SysOutOverSLF4J.sendSystemOutAndErrToSLF4J();
-		System.exit(App.getInstance().apply(args));
+		System.exit(App.getInstance().update(args));
 	}
 }
