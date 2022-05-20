@@ -1,8 +1,11 @@
 # No-IP Java DNS Updater
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=T9USZAMJHNBBC&lc=IT&item_name=No-IP%20Java%20DNS%20Updater&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted)
-![Travis-CI](https://travis-ci.com/davidecolombo/noip.svg?branch=master)
+[![Donate](https://img.shields.io/badge/PayPal-00457C?style=flat&logo=paypal&logoColor=white)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=T9USZAMJHNBBC&lc=IT&item_name=No-IP%20Java%20DNS%20Updater&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted)
+![Java](https://img.shields.io/badge/Java-ED8B00?style=flat&logo=java&logoColor=white)
+[![CircleCI](https://circleci.com/gh/davidecolombo/noip/tree/master.svg?style=shield)](https://circleci.com/gh/davidecolombo/noip/tree/master)
 [![DepShield Badge](https://depshield.sonatype.org/badges/davidecolombo/noip/depshield.svg)](https://depshield.github.io)
 [![Known Vulnerabilities](https://snyk.io//test/github/davidecolombo/noip/badge.svg?targetFile=pom.xml)](https://snyk.io//test/github/davidecolombo/noip?targetFile=pom.xml)
+![Code Size](https://img.shields.io/github/languages/code-size/davidecolombo/noip)
+![License](https://img.shields.io/github/license/davidecolombo/noip)
 
 This is a Java DNS updater for [No-IP](https://www.noip.com/), an alternative to [DUC](https://www.noip.com/download) (DNS Update Client). This updater is using both [Ipify](https://www.ipify.org/) and No-IP APIs to retrieve your current IP address and update your No-IP hostname. Please take a look at [settings.json](src/test/resources/settings.json) to configure it:
 
