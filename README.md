@@ -7,7 +7,7 @@
 ![Code Size](https://img.shields.io/github/languages/code-size/davidecolombo/noip)
 ![License](https://img.shields.io/github/license/davidecolombo/noip)
 
-This is a Java DNS updater for [No-IP](https://www.noip.com/), an alternative to [DUC](https://www.noip.com/download) (DNS Update Client). This updater is using both [Ipify](https://www.ipify.org/) and No-IP APIs to retrieve your current IP address and update your No-IP hostname. Please take a look at [settings.json](src/test/resources/settings.json) to configure it:
+This is a Java DNS updater for [No-IP](https://www.noip.com/), an alternative to [DUC](https://www.noip.com/download) (DNS Update Client). This updater is using both [Ipify](https://www.ipify.org/) and No-IP APIs to retrieve your current IP address and update your No-IP hostname. See: [settings.json](src/test/resources/settings.json)
 
 | Property | Description |
 | --- | --- |
@@ -16,22 +16,22 @@ This is a Java DNS updater for [No-IP](https://www.noip.com/), an alternative to
 | _hostName_ | the hostname(s) (host.domain.com) or group(s) (group_name) to be updated |
 | _userAgent_ | HTTP User-Agent to help No-IP identify your client |
 
-__NOTE__: When making an update it's important to include an HTTP User-Agent to help No-IP identify different clients that access the system. Clients that do not supply a User-Agent risk being blocked from the system.
-Your user agent should be in the following format:
+Note: when making an update it’s important to configure through the `userAgent` property an HTTP User-Agent in order to help No-IP identify different clients that access the system. Clients that don’t supply a User-Agent risk being blocked from the system. Your user agent should be in the following format:
 ```
 NameOfUpdateProgram/VersionNumber maintainercontact@domain.com
 ```
-Please also note you've to manually schedule the application execution in order to keep updated your dynamic DNS. The simplest way is probably using [Cron](https://en.wikipedia.org/wiki/Cron). Example:
-
+## Quick Start
+One-liner to download, configure and execute:
+```
+wget -O ~/noip.jar https://github.com/davidecolombo/noip/releases/download/v1.0.0/noip-1.0.0.jar && echo '{
+"userName": "userName",
+"password": "password",
+"hostName": "hostName",
+"userAgent": "NameOfUpdateProgram/VersionNumber maintainercontact@domain.com"
+}' > ~/settings.json && java -cp ~/noip.jar space.davidecolombo.noip.App -settings ~/settings.json
+```
+## Scheduling
+Please note you may want to schedule the application execution in order to keep updated your dynamic DNS, and the simplest way on *NIX systems is probably using [Cron](https://en.wikipedia.org/wiki/Cron). Example:
 ```
 */30 * * * * sudo DISPLAY=:1 java -cp /home/user/noip/noip-1.0.0.jar space.davidecolombo.noip.App -settings /home/user/noip/settings.json > /home/user/noip/log.txt 2>&1
-```
-
-Expected output:
-```
-[main] INFO  s.d.noip.noip.NoIpUpdater - IpifyResponse(ip=XX.XX.XXX.XX)
-[main] INFO  s.d.noip.noip.NoIpUpdater - HTTP status code: 200
-[main] INFO  s.d.noip.noip.NoIpUpdater - HTTP status message: OK
-[main] INFO  s.d.noip.noip.NoIpUpdater - No-IP response: nochg XX.XX.XXX.XX
-[main] INFO  space.davidecolombo.noip.App - Status: 1
 ```
