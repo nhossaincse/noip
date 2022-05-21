@@ -33,5 +33,5 @@ wget -O ~/noip.jar https://github.com/davidecolombo/noip/releases/download/v1.0.
 ## Scheduling
 Please note you may want to schedule the application execution in order to keep updated your dynamic DNS, and the simplest way on *NIX systems is probably using [Cron](https://en.wikipedia.org/wiki/Cron). Example:
 ```
-*/30 * * * * sudo DISPLAY=:1 java -cp /home/user/noip/noip-1.0.0.jar space.davidecolombo.noip.App -settings /home/user/noip/settings.json > /home/user/noip/log.txt 2>&1
+*/30 * * * * sudo DISPLAY=:1 java -cp /home/user/noip.jar space.davidecolombo.noip.App -settings /home/user/settings.json > /home/user/noip-log.txt 2>&1
 ```
