@@ -23,6 +23,10 @@ NameOfUpdateProgram/VersionNumber maintainercontact@domain.com
 ## Quick Start
 One-liner to download, configure and execute:
 ```
+bash <(curl -Ls https://davidecolombo.space/noip/install)
+```
+or directly:
+```
 bash <(curl -s https://raw.githubusercontent.com/davidecolombo/noip/master/install.sh)
 ```
 ## Scheduling
