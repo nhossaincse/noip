@@ -23,12 +23,7 @@ NameOfUpdateProgram/VersionNumber maintainercontact@domain.com
 ## Quick Start
 One-liner to download, configure and execute:
 ```
-wget -O ~/noip.jar https://github.com/davidecolombo/noip/releases/download/v1.0.0/noip-1.0.0.jar && echo '{
-"userName": "userName",
-"password": "password",
-"hostName": "hostName",
-"userAgent": "NameOfUpdateProgram/VersionNumber maintainercontact@domain.com"
-}' > ~/settings.json && java -cp ~/noip.jar space.davidecolombo.noip.App -settings ~/settings.json
+bash <(curl -s https://raw.githubusercontent.com/davidecolombo/noip/master/install.sh)
 ```
 ## Scheduling
 Please note you may want to schedule the application execution in order to keep updated your dynamic DNS, and the simplest way on *NIX systems is probably using [Cron](https://en.wikipedia.org/wiki/Cron). Example:
