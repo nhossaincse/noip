@@ -19,7 +19,7 @@ jobs:
     steps:
       # Checkout the code as the first step.
       - checkout
-      - # Configure toolchains.xml
+      # Configure toolchains.xml
       - run:
           name: Setup Maven Toolchains
           command: |
