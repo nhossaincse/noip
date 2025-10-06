@@ -1,6 +1,6 @@
 #!/bin/bash
 set -euo pipefail
-readonly version="1.0.1"
+readonly version="1.0.2"
 
 # Read the userName
 read -p "Enter your NoIP.com userName: " userName
@@ -26,7 +26,7 @@ if [ -n "$userInput" ]; then
 fi
 
 wget -O ~/noip.jar \
-https://github.com/davidecolombo/noip/releases/download/v${version}/noip-${version}.jar && \
+https://github.com/davidecolombo/noip/releases/download/v${version}/noip-${version}-jar-with-dependencies.jar && \
 echo "{
 \"userName\": \"${userName}\",
 \"password\": \"${password}\",
