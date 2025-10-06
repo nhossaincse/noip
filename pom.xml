@@ -202,7 +202,7 @@
                     <toolchains>
                         <jdk>
                             <version>${project.java.version}</version>
-                            <vendor>oracle</vendor>
+                            <vendor>openjdk</vendor>
                         </jdk>
                     </toolchains>
                 </configuration>
