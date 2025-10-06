@@ -19,6 +19,11 @@ jobs:
     steps:
       # Checkout the code as the first step.
       - checkout
+      - run:
+          name: Check installed JDK path
+          command: |
+            echo "JAVA_HOME = $JAVA_HOME"
+            ls -l $JAVA_HOME
       # Configure toolchains.xml
       - run:
           name: Setup Maven Toolchains
