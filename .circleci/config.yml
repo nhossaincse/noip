@@ -19,6 +19,7 @@ jobs:
     steps:
       # Checkout the code as the first step.
       - checkout
+      # Check installed JDK path
       - run:
           name: Check installed JDK path
           command: |
@@ -38,7 +39,7 @@ jobs:
                   <vendor>openjdk</vendor>
                 </provides>
                 <configuration>
-                  <jdkHome>/usr/lib/jvm/java-21-openjdk-amd64</jdkHome>
+                  <jdkHome>${JAVA_HOME}</jdkHome>
                 </configuration>
               </toolchain>
             </toolchains>
