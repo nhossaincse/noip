@@ -24,7 +24,7 @@ jobs:
           name: Setup Maven Toolchains
           command: |
             mkdir -p ~/.m2
-            cat > ~/.m2/toolchains.xml <<'EOF'
+            cat > ~/.m2/toolchains.xml \<<'EOF'
             <toolchains>
               <toolchain>
                 <type>jdk</type>
